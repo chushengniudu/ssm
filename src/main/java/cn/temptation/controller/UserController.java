@@ -1,4 +1,4 @@
-package cn.temptation.web;
+package cn.temptation.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.temptation.dao.UserDao;
-import cn.temptation.domain.User;
+import cn.temptation.entity.User;
+import cn.temptation.service.UserService;
 
 /**
  * 用户控制器
@@ -18,7 +19,7 @@ import cn.temptation.domain.User;
 @RequestMapping(value = "/user")
 public class UserController {
     @Resource
-    private UserDao userDao;
+    private UserService userService;
 
     @RequestMapping("/view")
     public String view() {
@@ -32,8 +33,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(User model, HttpSession session) {
-        User user = userDao.findByUsername(model.getUsername());
-
+        User user = userService.findByUsername(model.getUsername());
         if (user == null || !user.getPassword().equals(model.getPassword())) {
             return new ModelAndView("redirect:/login.jsp");
         } else {

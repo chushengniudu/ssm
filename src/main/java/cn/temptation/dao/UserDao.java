@@ -1,6 +1,6 @@
 package cn.temptation.dao;
 
-import cn.temptation.domain.User;
+import cn.temptation.entity.User;
 
 public interface UserDao {
 	public abstract User findByUsername(String username);

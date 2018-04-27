@@ -1,4 +1,4 @@
-package cn.temptation.domain;
+package cn.temptation.entity;
 
 public class User {
 
